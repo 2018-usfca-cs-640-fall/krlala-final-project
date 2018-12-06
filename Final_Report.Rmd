@@ -1,6 +1,6 @@
 ---
-title: "Final Report: Your Title Here"
-author: "Don Francisco"
+title: "Final Report: title"
+author: "Karan Lala"
 date: "December 5, 2018"
 output:
     github_document: default
@@ -32,26 +32,158 @@ These are the methods you used to do your bioinformatic analyses analyses. Shoul
 
 # Results
 
-## Subsections are ok in the results section too
 
-```{r your-code-here}
+
+```{r your-code-here, include=FALSE}
 # Add code chunks as needed for your analyses
 # For most analyses, I would recommend splitting the
 # intensive computational part into a seperate R script file
 # and then just load your libraries and the data object here
 # using the `load()` function. Ask me for clarification if this is
 # unclear.
+library("dplyr")
+library("tidyr")
+library("knitr")
+library("ggplot2")
+library("citr")
+library("phyloseq")
 ```
 
-```{r load-packages-and-data}
+```{r load-packages-and-data, include=FALSE}
 # load packages as needed
 library("dplyr")
-
+load("output/phyloseq_obj.Rdata")
+load("output/melted_phyloseq.Rdata")
 # load data produced from analysis scripts using
 # something like load("output/processed_data.Rdata")
+# see info here: https://benjjneb.github.io/dada2/dada-installation.html
+library("dada2")
+
+# This to export a fasta of our final denoised sequence variants
+library("seqinr")
+
+# To install this you have to install from GitHub
+# See more info here: https://github.com/leffj/mctoolsr
+# run this -- install.packages("devtools")
+# and then this -- devtools::install_github("leffj/mctoolsr")
+library("mctoolsr")
 ```
 
-In addition to a minimum of 5-8 figures/tables (and associated captions), you should include sufficient text in this section to describe what your findings were. Remember that in the results section you just describe what you found, but you don't interpret it - that happens in the discussion. 2-3 pages.
+
+
+
+
+```{r figure 1 phyluminEU, echo = FALSE}
+# Subsets only EU samples
+euphyloseq_obj <- subset_samples(phyloseq_obj,
+                                     IHMC_ethnicity == "caucasian")
+# plots abundance according to phyla
+plot_bar(euphyloseq_obj,
+         x = "Phylum")
+```
+
+ Figure 1: The bar plot in this figure shows the abundance of bacteria by phylum, for the children from the EU. The most abundant is Firmicutes, and Bacteroidetes is much lower. Proteobacteria and Actinobacteria make up the four major abundant phylum.
+ 
+ 
+ 
+```{r figure 2 phyluminBF, echo = FALSE}
+# subests only BF samples
+bfphyloseq_obj <- subset_samples(phyloseq_obj,
+                                     IHMC_ethnicity == "black african")
+plot_bar(bfphyloseq_obj,
+         x = "Phylum")
+```
+
+ Figure 2: This bar plot clearly shows the abundance of bacteria by phylum, for the BF children. Bacteroidetes is the most abundant, followd by Firmicutes and Actinobacteria. Proteobacteria and Spirochaetes are also observed. Even the NA (unidentified) phyla has some presence.
+ 
+ 
+ 
+```{r figure 3 alphadiv_birthdelivery, echo = FALSE}
+# Creates an alpha diversity plot.
+# This uses the Shannon and Simpson method of
+# measuring alpha diversity.
+plot_richness(euphyloseq_obj,
+              x = "birth_delivery",
+              measures = c("Shannon", "Simpson"), color = "age"
+              ) +
+  xlab("Childbirth") +
+  geom_jitter(width = 0.2) +
+  theme_bw()
+```
+
+ Figure 3: Alpha diversity plot by Shannon and Simpson method, examining different birthing conditions. There aren't many samples in the cesarean childbirth. The markers are shaded for age, with the darker color representing a younger age.
+ 
+ 
+ 
+```{r figure 4 alphadiv_sex, echo = FALSE}
+# Another alpha diversity plot, but created with distinction
+# according to sex.
+plot_richness(phyloseq_obj,
+              x = "Sex",
+              measures = c("Shannon", "Simpson"),
+              color = "IHMC_ethnicity") +
+  xlab("Sex") +
+  geom_jitter(width = 0.2) +
+  theme_bw()
+```
+
+ Figure 4: Alpha diversity by Shannon and Simpson method, with sex on the x axis and the points shaded by ethnicity.
+ There doesn't appear to be much difference in diversity by gender. For the ethnicity, it appears similar but with more data from the BF samples on the lower end of the index.
+ 
+ 
+ 
+```{r figure 5 networkplot, echo = FALSE}
+# creates an igraph using Bray-Curtis method for determining
+# community similarity. max.dist is usually 0.3, changed to
+# 1.0 to accomodate all points(samples)
+ig <- make_network(phyloseq_obj, dist.fun = "bray", max.dist = 1.0)
+plot_network(ig, phyloseq_obj,  color = "age", shape = "IHMC_ethnicity",
+             line_weight = 0.4, label = "BioSample")
+```         
+
+ Figure 5: This network plot shows the similarity between gut microbiota from different samples, using the Bray-Curtis method. Since the shapes represent ethnicity, it is notable that all clusters are of the same ethnicity except for one on the top right of the image.
+ 
+ 
+ 
+```{r figure 6 netplot, echo = FALSE}
+plot_net(phyloseq_obj, maxdist = 1.0, point_label = "BioSample",
+         color = "IHMC_ethnicity")
+```         
+
+ Figure 6: This is a network plot using the Jaccard distance index, and shows same ethnicity clusters apart for one as seen by the dissimilar colors representing ethnicity in the same cluster.
+ 
+ 
+
+```{r figure 7 Order_insample, echo = FALSE}
+# facet_grid allows for creation of multiple graphs
+# separated according to parameter provided.
+p <- plot_bar(phyloseq_obj, x = "IHMC_ethnicity", fill = "Order",
+             facet_grid = ~BioSample)
+# the following line of code fills the black separation lines
+# between the different orders
+p + geom_bar(aes(color = Order, fill = Order),
+             stat = "identity", position = "stack")
+
+```         
+
+Figure 7: This bar plot shows the abundance of bacteria, colored by their Order, for each sample. 
+
+
+
+```{r figure 8 familyabundance, echo = FALSE}
+
+plot_bar(phyloseq_obj, facet_grid = ~IHMC_ethnicity,
+         x = "Family")
+```
+
+ Figure 8: This graph looks at the abundance by Family across both ethnicities.
+
+
+
+
+
+
+
 
 # Discussion
 
