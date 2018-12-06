@@ -45,6 +45,7 @@ the reduction in diversity caused by antibiotics, and also interference with
 beneficial effects of breast milk.[@ajslev2011childhood][@rautava2016early] Composition of the gut microbiota is sensitive
 during the early years of life and plays a key role in human health and establishing
 a healthy microbiota. 
+Gut bacteria make many compounds, including neurotransmitters, that may interfere with the physiological processes of the host. Serotonin is isolated from Streptococcus, Escherichia, and Enterococcus species, dopamine is produced by Bacillus species, and ??-aminobutyric acid is produced by Lactobacillus and Bifidobacterium species.
 
 
 Recent evidence suggests that a failure to enhance
@@ -56,7 +57,9 @@ as a signaling molecule in the colon wall; and acetate modulates gene expression
 in the gastrointestinal tract and also in other tissues.[@koliada2017association]
 In certain studies in mice, exposure to antibiotic doses resulted in a significant
 decrease in the B/F ratio, which indicates lower diversity and a propensity towards
-obesity.[@ley2006microbial]
+obesity.[@ley2006microbial] It was discovered that transient dietary changes stayed ineffectual in activating huge changes in 'enterotypes', which are characterized as three groups of genera dominated by Bacteroides, Prevotella, and Ruminococcus 
+
+Also, a high-fiber content eating routine introduces varieties in the gut microbiota and helps towards performing several beneficial tasks.
 As a whole, there isn't much evidence suggesting that there exists a core human
 gut microbiome. While there are similarities between communities and families,
 each human has a unique microbiome, and across populations and changes in climate
@@ -228,7 +231,7 @@ plot_bar(bfphyloseq_obj,
          x = "Phylum")
 ```
 
- *Figure 2:* This bar plot clearly shows the abundance of bacteria by phylum, for the BF children. Bacteroidetes is the most abundant, followd by Firmicutes and Actinobacteria. Proteobacteria and Spirochaetes are also observed. Even the NA (unidentified) phyla has some presence.
+ *Figure 2:* This bar plot clearly shows the abundance of bacteria by phylum, for the BF children. Bacteroidetes is the most abundant, followd by Firmicutes and Actinobacteria. Proteobacteria and Spirochaetes are also observed. Even the NA (unclassified) phyla has some presence.
  
  
  
@@ -339,6 +342,27 @@ plot_bar(phyloseq_obj, facet_grid = ~IHMC_ethnicity,
 
 # Discussion
 
-Add around 3-4 pages interpreting your results and considering future directions one might take in analyzing these data.
+Visualizing the data, some conclusions and hypotheses appear significant.
+Figure 1 shows abundance by phyla for the EU samples. Firmicutes clearly has the highes abundance, and is followed by Bacteroidetes. Looking at the F/B factor, which may affect the chances of getting diabetes, the ratio is high here. A higher ratio ir correlated with an increase the odds of getting diabetes. This could indicate that the normal westernized diet affects individuals in an adverse way, already predisposing them to obesity.
+Actinobacteria and Proteobacteria also some abundance, while the other phyla are barely present.
+Figure 2 similarly examines the data obtained from the BF children. This shows an abundance of Bacteroidetes, and the F/B ratio would be much lower, indicating a lesser chance of developing obesity. Actinobacteria and Proteobacteria make upmost of the other samples, but there is a noticeable amount of Spirochaetes and unclassified organisms as well, as compared to the same graph for samples from the EU children. This may represent a stronger diversity profile for the gut microbiota resulting from the BF diet.
+
+Figure 3 looks at alpha diversity measures for samples separated by type of childbirth. Since no BF children had a cesarean childbirth, this figure looks at data only from the EU children. The diversity scores are above 3.5 according to the Shannon index, and the number of cesarean samples are too few to make any definitive conclusions. The data that is observed, however, atleast indicates thatthe diversity is not affected by type of childbirth as similar alpha diversity profiles can be observed for both. The color shading with age also does not show much difference, though there is a slight trend of the samples from the younger children having richer diversity.
+Figure 4 looks at the difference in alpha diversity by sex. For both measures, the diversity according to sex seems very even, showing no bias. The orange color represnting the BF samples are more frequent lower in the figure, as contrasted with the EU samples that are more clustered at the top. The Simpson measure shows richer and more diverse communities with a lower score, showing that the BF gut microbiome has a more diverse community.
+
+Figures 5 and 6 look at community network plots for all the samples. Since the parameters that were initialized for producing these graphs was modified, this data is difficult to parse. The figures use the Bray-curtis method and Jaccard index for mapping the network and shows similar clusters of samples. All the sample clusters comprise of samples of the same ethnicity, except for one which include two EU and one BF sample. The points/samples were not well represented with a smaller maximum distance parameter, and that could mean that these samples show a large amount of diversity from each other, which may be further looked at with trees.
+The study concludes that the youngest children from both groups form a hierarchical cluster that is separate from the other two major populations that represent each ethnicity. That result implies that the diet influnces the gut microbiome greatly, since while being motly nourished with breast milk, the children has similar gut microbial profiles, and the diverge after diets change, inspite of all the factors differentiating these two sampling environments.
+
+The last two figures look at the abundance of bacteria according to taxa acroess samples and ethnicities. It is seen by the bars in figure 7 that Bacteroidales is an abundant Order from the Phylum Bacteroidetes. Clostridiales from the Phylum Firmicutes is also common, as are Spirochaetales and Lactobacillales. A very similar abundance of bacteria from class Actinobacteria and Proeteobacteria are observed among both sample populations. This could mean that the amount in which these phyla are present does not variate much among children aged 1-6, but vary in abundance of Bacteroidetes and Firmicutes. The diversity profiles from all samples do not suggest any dysbiosis, these samples were obtained from healthy children. Figure 8 takes a deeper look at the abundance according to Family of bacteria present.The most abundant in the BF children is Prevotellaceae. Ruminococcaceae, Lachnospiraceae, Bifidobacteriaceae are also present in high abundance.
+For the EU children, Ruminococcaceae, Lachnospiraceae, Bifidobacteriaceae are common with seemingly more diversity across families, and a low abundance of  Prevotellaceae.
+A study suggested that formula-fed infants contain higher abundance of Escherichia coli, C. difficile, Bacteroides, and Lactobacilli than breast-fed infants . Vaginal delivery and breast-feeding were suggested as being optimal for maintaining a healthy gut microbiota (higher abundance of Bifidobacteria and lower abundance of C. difficile and E. coli) 
+Its observed that the type of childbirth did not impact the gut microbiome diversity, and a high abundance of Bifidobacteria is observed in both groups of samples, from different ethnicities.
+
+Prevotella species are among the various organisms culturable from the rumen and rear gut of cows and sheep, where they help the breakdown of protein and sugar compounds. 
+As a human pathogen known for causing periodontal and tooth issues, Prevotella has been studied for quite some time to balance its pathogenesis. Prevotellaceae show a much higher abundance in the BF children, as compared to the EU children. Studies have revealed a possible inverse relationship between the abundance of Prevotellaceae and the occurence of Parkinson's disease. A higher abundance of Prevotellaceae was not found in the patients with Parkinon's disease, and it is hypothesized that the brain is affected due to the breakdown of a gut mucosal barrier.
+
+Th human microbiome is composed of many microbiota, and many of them can potentially serve as markers to help diagnose conditions or and individual's predisposition to them, like with a DNA test. Such services are already available, and if more bacteria with links to the brain and its metabolites are found, it solidifies the connection between the gut and brain. The data analysed here concludes by agreeing with most of the original paper's conclusions, and there is data that can be further scrutinized. 
+
+
 
 # Sources Cited
