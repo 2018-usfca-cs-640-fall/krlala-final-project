@@ -1,5 +1,5 @@
 ---
-title: "Final Report: title"
+title: "Final Report: Impact of diet on diversity and abundance of gut microbiota"
 author: "Karan Lala"
 date: "December 6, 2018"
 output:
@@ -12,6 +12,8 @@ csl: bioinformatics.csl
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+###E-mail: "krlala@usfca.edu"
+
 # Introduction
 
 
@@ -19,7 +21,9 @@ It seems intuitive that gut microbiota depends on the sort of diet provided
 as the processing of such material would likely involve some metabolic processes
 on the part of the members of the gut microbiota. The gut microbiota plays a
 major role in the development of food absorption and low  grade inflammation,
-two key processes in obesity and diabetes.[@david2014diet] A majority of the gut microbiota
+two key processes in obesity and diabetes.[@david2014diet] 
+
+A majority of the gut microbiota
 reside in the large intestine and they can even increase energy production from
 diets. The gut microbiota hence can have an immense impact of the health and
 physiological well being of individuals.[@rook2005microbes] Apart from a lack of clear understanding
@@ -40,7 +44,10 @@ life is associated with being overweight later in life. This could happen due to
 the reduction in diversity caused by antibiotics, and also interference with
 beneficial effects of breast milk.[@ajslev2011childhood][@rautava2016early] Composition of the gut microbiota is sensitive
 during the early years of life and plays a key role in human health and establishing
-a healthy microbiota. Recent evidence suggests that a failure to enhance
+a healthy microbiota. 
+
+
+Recent evidence suggests that a failure to enhance
 microbial communities during early life can result in cases of obesity later.[@gill2006metagenomic]
 The microbiome also metabolizes plant polysaccharides (such as fiber and resistant starch)
 into short-chain fatty acids, like butyrate is an energy source for intestinal epithelial
@@ -79,6 +86,8 @@ were present in smaller amounts comparatively, Firmicutes and Proteobacteria
 were significantly enriched in the EU children.[@mariat2009firmicutes]
 Prevotella, Xylanibacter from Bacteroidetes  and Treponema from Spirochaetes are
 found only in the microbiota of BF children.
+
+
 It is also noted that the BF children that are youngest and breast fed observe
 abundant Actinobacteria from the Bifidobacterium genus. This supports the hypothesis
 that diet affects the gut microbiota. After hierarchical clustering, it is observed
@@ -96,7 +105,7 @@ Diet plays an important role in determining the composition of the microbiota. A
 study helped show that as bacterial species that are associated with high sugar
 and fat diets are found to promote obesity in gnotobiotic mice.[@turnbaugh2009effect] The ratio of
 Firmicutes to Bacteroidetes (F/B) differs in obese and lean humans and the
-ratio decreases on a low calorie diet with weight loss.[@turnbaugh2009core:1]
+ratio decreases on a low calorie diet with weight loss.
 
 
 # Methods
@@ -138,14 +147,17 @@ DADA2 starts with set of Illumina-sequenced paired-end fastq files that have bee
 been removed.[@callahan2016dada2] The final product is an amplicon sequence variant (ASV) table, a higher-resolution analogue of the traditional OTU table,
 which records the number of times each exact amplicon sequence variant was observed in each sample.
 Taxonomy is then assigned and data can be imported into the popular phyloseq R package for the analysis of microbiome data.
+
+
 Quality profiles for forward and reverse reads are generated and DADA2 incorporates quality information into its models, for example accounting to Some
 extent for the low base quality reads at the end of sequences. It then filters and trims the data. DADA2 builds an error model from the data, and starts
 with an initial guess, as do machine learning techniques.
 Dereplication combines all identical sequencing reads into into "unique sequences" with a corresponding "abundance" equal to the number of reads with
 that unique sequence. Dereplication substantially reduces computation time by eliminating redundant comparisons. Now, DADA2 merges the forward and
 reverse reads together to obtain the full denoised sequences and constructs a sequence variant table by traditional methods.
-Next, it removes chimeras and provides a native implementation of the Bayesian classifier method for assigning taxonomy. Finally, this data
-generated can be used with phyloseq.
+Next, it removes chimeras and provides a native implementation of the Bayesian classifier method for assigning taxonomy. 
+
+Finally, this data generated can be used with phyloseq.
 The phyloseq package is a tool to import, store, analyze, and graphically display complex phylogenetic sequencing data that has already been clustered into Operational Taxonomic Units (OTUs), especially when there is associated sample data, phylogenetic tree, and/or taxonomic assignment of the OTUs.[@mcmurdie2013phyloseq] This package leverages many of the tools available in R for ecology and phylogenetic analysis (vegan, ade4, ape, picante), while also using advanced/flexible graphic systems (ggplot2) to easily produce publication-quality graphics of complex phylogenetic data.
 
 
@@ -201,7 +213,10 @@ plot_bar(euphyloseq_obj,
          x = "Phylum")
 ```
 
- Figure 1: The bar plot in this figure shows the abundance of bacteria by phylum, for the children from the EU. The most abundant is Firmicutes, and Bacteroidetes is much lower. Proteobacteria and Actinobacteria make up the four major abundant phylum.
+ *Figure 1:* The bar plot in this figure shows the abundance of bacteria by phylum, for the children from the EU. The most abundant is Firmicutes, and Bacteroidetes is much lower. Proteobacteria and Actinobacteria make up the four major abundant phylum.
+ 
+ 
+ 
  
  
  
@@ -213,7 +228,10 @@ plot_bar(bfphyloseq_obj,
          x = "Phylum")
 ```
 
- Figure 2: This bar plot clearly shows the abundance of bacteria by phylum, for the BF children. Bacteroidetes is the most abundant, followd by Firmicutes and Actinobacteria. Proteobacteria and Spirochaetes are also observed. Even the NA (unidentified) phyla has some presence.
+ *Figure 2:* This bar plot clearly shows the abundance of bacteria by phylum, for the BF children. Bacteroidetes is the most abundant, followd by Firmicutes and Actinobacteria. Proteobacteria and Spirochaetes are also observed. Even the NA (unidentified) phyla has some presence.
+ 
+ 
+ 
  
  
  
@@ -230,7 +248,10 @@ plot_richness(euphyloseq_obj,
   theme_bw()
 ```
 
- Figure 3: Alpha diversity plot by Shannon and Simpson method, examining different birthing conditions. There aren't many samples in the cesarean childbirth. The markers are shaded for age, with the darker color representing a younger age.
+ *Figure 3:* Alpha diversity plot by Shannon and Simpson method, examining different birthing conditions. There aren't many samples in the cesarean childbirth. The markers are shaded for age, with the darker color representing a younger age.
+ 
+ 
+ 
  
  
  
@@ -246,8 +267,11 @@ plot_richness(phyloseq_obj,
   theme_bw()
 ```
 
- Figure 4: Alpha diversity by Shannon and Simpson method, with sex on the x axis and the points shaded by ethnicity.
+ *Figure 4:* Alpha diversity by Shannon and Simpson method, with sex on the x axis and the points shaded by ethnicity.
  There doesn't appear to be much difference in diversity by gender. For the ethnicity, it appears similar but with more data from the BF samples on the lower end of the index.
+ 
+ 
+ 
  
  
  
@@ -260,7 +284,10 @@ plot_network(ig, phyloseq_obj,  color = "age", shape = "IHMC_ethnicity",
              line_weight = 0.4, label = "BioSample")
 ```         
 
- Figure 5: This network plot shows the similarity between gut microbiota from different samples, using the Bray-Curtis method. Since the shapes represent ethnicity, it is notable that all clusters are of the same ethnicity except for one on the top right of the image.
+ *Figure 5:* This network plot shows the similarity between gut microbiota from different samples, using the Bray-Curtis method. Since the shapes represent ethnicity, it is notable that all clusters are of the same ethnicity except for one on the top right of the image.
+ 
+ 
+ 
  
  
  
@@ -269,9 +296,12 @@ plot_net(phyloseq_obj, maxdist = 1.0, point_label = "BioSample",
          color = "IHMC_ethnicity")
 ```         
 
- Figure 6: This is a network plot using the Jaccard distance index, and shows same ethnicity clusters apart for one as seen by the dissimilar colors representing ethnicity in the same cluster.
+ *Figure 6:* This is a network plot using the Jaccard distance index, and shows same ethnicity clusters apart for one as seen by the dissimilar colors representing ethnicity in the same cluster.
  
  
+
+
+
 
 ```{r figure 7 Order_insample, echo = FALSE}
 # facet_grid allows for creation of multiple graphs
@@ -285,7 +315,10 @@ p + geom_bar(aes(color = Order, fill = Order),
 
 ```         
 
-Figure 7: This bar plot shows the abundance of bacteria, colored by their Order, for each sample. 
+ *Figure 7:* This bar plot shows the abundance of bacteria, colored by their Order, for each sample. 
+
+
+
 
 
 
@@ -295,7 +328,7 @@ plot_bar(phyloseq_obj, facet_grid = ~IHMC_ethnicity,
          x = "Family")
 ```
 
- Figure 8: This graph looks at the abundance by Family across both ethnicities.
+ *Figure 8:* This graph looks at the abundance by Family across both ethnicities.
 
 
 
